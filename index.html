@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECF Vidéothèque</title>
+    <script src="assets/js/app.js" defer></script>
+</head>
+
+<body>
+    
+    <header> <!-- container flex column-->
+        <h1>Liste des films</h1>
+        <section id="section_ajouter">
+            <form id="form_ajouter">
+                <input type="text" name="titre_aj" id="titre_aj" placeholder="Titre">
+                <input type="number" name="annee_aj" id="annee_aj" placeholder="Année de sortie">
+                <input type="text" name="real_aj" id="real_aj" placeholder="Réalisateur">
+                <button type="submit" id="btn_ajouter">Ajouter</button>
+            </form>
+        </section>
+    </header>
+    
+    <main>
+        <section>
+            <label for="filtre">Filtrer par :</label>
+            <select name="filtre" id="filtre">
+                <option value="annee">Année</option>
+                <option value="titre">Titre</option>
+            </select>
+        </section>
+        
+        <table id="table">
+            <tr>
+                <th>Titre</th>
+                <th>Année</th>
+                <th>Réalisateur</th>
+                <th></th>
+            </tr>
+        </table>
+    </main>
+
+</body>
+
+</html>
