@@ -15,7 +15,7 @@ var films = [
         authors: "Wes Craven"
     },
     {
-        title: "It: chapter 1",
+        title: "It: Chapter 1",
         years: 2019,
         authors: "Andy Muschietti"
     }
@@ -24,14 +24,14 @@ var films = [
 //récupérer le tableau pour faire l'affichage de [films]
 let table = document.querySelector("#table")
 
-function movie() { //créer une fonction pour réutiliser l'affichage pour ajout utilisateur
+function movie() {
     films.forEach(film => {
         table.insertAdjacentHTML("beforeend", `<tr><td>${film.title}</td><td>${film.years}</td><td>${film.authors}</td></tr>`)
     })
 }
 
 movie();
-//récupérer le btn aj pour l'eventListener
+
 let aj = document.querySelector("#btn_ajouter")
 //au click, ajouter form dans la section, récupérer la value des inputs et compléter le tableau
 aj.addEventListener("click", function () {
@@ -44,20 +44,27 @@ aj.addEventListener("click", function () {
 
     document.querySelector("#save").addEventListener("click", function (event) {
         event.preventDefault();
-        //vérifier les entrées des inputs, ok=afficher, !ok=message erreur
+
         let ok = true; //bouton on/off pour décider de l'affichage du contenu utilisateur
         let erreur = document.querySelector("#erreur")
         let txterreur = ""; //conserver et MàJ les erreurs pour affichage message final
 
-        //vérification input Titre
-        let titre = document.querySelector("#titre_aj").value;
-        console.log(titre);
+        //VERIFICATION input Titre
+        let titre = document.querySelector("#titre_aj").value; //
+            //capitalize de Titre
+        let t2 = "";
+        titre.split(" ").forEach(mot => {
+            mot = mot[0].toUpperCase() + mot.slice(1) + " ";
+            t2 += mot;
+        })
+        titre = t2;
+
         if (titre.length < 2) {
             ok = false;
             txterreur += `<li>Titre trop court, 2 caractères minimum.</li>`
         }
 
-        //vérification input Année
+        //VERIFICATION input Année
         let currentYear = new Date().getFullYear();
         let annee = document.querySelector("#annee_aj").value;
         let REannee = new RegExp("^\\d{4}$"); //commence et termine par un chiffre. doit en avoir 4
@@ -70,16 +77,25 @@ aj.addEventListener("click", function () {
             txterreur += `<li>L'année doit être compris entre 1900 et aujourd'hui.</li>`
         }
 
-        //vérification input Réalisateur
+        //VERIFICATION input Réalisateur
         let real = document.querySelector("#real_aj").value;
-        let REreal = new RegExp("[a-zA-Z]{5,}"); //5 lettres ou plus
-        if (!REreal.test(real)) {
+            //capitalize de Réal
+        let r2 = "";
+        real = real.split(" ");
+        real.forEach(word => {
+            word = word[0].toUpperCase() + word.slice(1);
+            r2 += word + " ";
+        });
+        real = r2
+
+        let REreal = new RegExp(/[\w+(\s?)(\w+?)]{5,}/)
+        if (!REreal.test(real)) { //prend en compte les espaces (changer pour 6?)
             ok = false;
-            txterreur += `<li>Le nom du réalisateur doit être composé de 5 lettres minimum.</li>`
+            txterreur += `<li>Le nom du réalisateur doit être composé de 5 caractères minimum.</li>`
         }
 
-        //affichage dans la section erreur en fonction de ok
-        console.log(ok)
+        //AFFICHAGE dans la section erreur en fonction de ok
+
         if (ok) {
             films.push({title: titre, years: parseInt(annee), authors: real})
             let lastFilm = films[films.length - 1];
@@ -97,3 +113,5 @@ aj.addEventListener("click", function () {
         }
     })
 })
+
+//FILTRE
