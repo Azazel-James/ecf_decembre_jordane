@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trouver un film</title>
+    <script src="assets/js/form_api.js" defer></script>
 </head>
 <body>
     <header>
@@ -11,7 +12,13 @@
         <form>
             <input type="text" name="titre" id="txt_titre" placeholder="Titre">
             <input type="number" name="annee" id="nbr_annee" placeholder="Année de sortie">
-            <input type="text" name="real" id="txt_real" placeholder="Réalisateur">
+            <select name="type" id="type">
+                <option value="movie">Film</option>
+                <option value="episode">Episode</option>
+                <option value="series">Série</option>
+                <option value="season">Saison</option>
+            </select>
+            
             <button type="submit">Chercher</button>
         </form>
     </header>

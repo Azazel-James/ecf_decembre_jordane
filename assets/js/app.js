@@ -101,16 +101,6 @@ aj.addEventListener("click", function () {
             films.push({title: titre, years: parseInt(annee), authors: real})
             let lastFilm = films[films.length - 1];
             table.insertAdjacentHTML("beforeend", `<tr><td>${lastFilm.title}</td><td>${lastFilm.years}</td><td>${lastFilm.authors}</td><td><button class="supprimer rounded-2 bg-red-700 ring text-white p-1">Supprimer</button></td></tr>`)
-            let btn_sup = document.querySelectorAll(".supprimer");
-
-            //BOUTON SUPPRIMER
-            btn_sup.forEach((btn) => {
-                btn.addEventListener("click", function () {
-                    if (confirm("Voulez-vous supprimer ce film de la liste ?") === true) {
-                        table.deleteRow(this.parentElement.parentElement.rowIndex);
-                    }
-                });
-            });
 
             erreur.innerHTML = `<p>Film ajouté avec succès.</p>`
             setTimeout(() => {
@@ -145,5 +135,16 @@ filtre.addEventListener("change", function (event) {
 });
 
 //BOUTON SUPPRIMER initialisé dans la fonction de l'eventListener #save pour prendre en compte les ajouts de l'utilisateur
-//Bouton supprimer HS après utilisation du filtre (post déplacement)
-//Bouton sup HS si pas ajout utilisateur obviously @_@
+//Bouton supprimer HS après utilisation du filtre → le filtre annule les suppressions : movie() republie tout le tableau
+//Bouton sup HS si pas ajout utilisateur obviously @_@ → pas de btn post ajout || pas de btn au départ
+
+let btn_sup = document.querySelectorAll(".supprimer");
+
+//BOUTON SUPPRIMER
+btn_sup.forEach((btn) => {
+    btn.addEventListener("click", function () {
+        if (confirm("Voulez-vous supprimer ce film de la liste ?") === true) {
+            table.deleteRow(this.parentElement.parentElement.rowIndex);
+        }
+    });
+});
