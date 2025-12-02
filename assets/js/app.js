@@ -27,7 +27,7 @@ let table = document.querySelector("#table")
 function movie() {
     table.innerHTML = `<tr><th>Titre</th><th>Année</th><th>Réalisateur</th></tr>`;
     films.forEach(film => {
-        table.insertAdjacentHTML("beforeend", `<tr><td>${film.title}</td><td>${film.years}</td><td>${film.authors}</td><td><button class="supprimer">Supprimer</button></td></tr>`)
+        table.insertAdjacentHTML("beforeend", `<tr><td>${film.title}</td><td>${film.years}</td><td>${film.authors}</td><td><button class="supprimer rounded-2 bg-red-700 ring text-white p-1">Supprimer</button></td></tr>`)
     })
 }
 
@@ -41,7 +41,7 @@ aj.addEventListener("click", function () {
                 <input type="text" name="titre_aj" id="titre_aj" placeholder="Titre">
                 <input type="number" name="annee_aj" id="annee_aj" placeholder="Année de sortie">
                 <input type="text" name="real_aj" id="real_aj" placeholder="Réalisateur">
-                <button type="submit" id="save">Ajouter</button></form>`;
+                <button type="submit" id="save" class="rounded-2 bg-slate-500 ring text-white p-1">Ajouter</button></form>`;
 
     document.querySelector("#save").addEventListener("click", function (event) {
         event.preventDefault();
@@ -52,7 +52,7 @@ aj.addEventListener("click", function () {
 
         //VERIFICATION input Titre
         let titre = document.querySelector("#titre_aj").value; //
-            //capitalize de Titre
+        //capitalize de Titre
         let t2 = "";
         titre.split(" ").forEach(mot => {
             mot = mot[0].toUpperCase() + mot.slice(1) + " ";
@@ -80,7 +80,7 @@ aj.addEventListener("click", function () {
 
         //VERIFICATION input Réalisateur
         let real = document.querySelector("#real_aj").value;
-            //capitalize de Réal
+        //capitalize de Réal
         let r2 = "";
         real = real.split(" ");
         real.forEach(word => {
@@ -100,7 +100,18 @@ aj.addEventListener("click", function () {
         if (ok) {
             films.push({title: titre, years: parseInt(annee), authors: real})
             let lastFilm = films[films.length - 1];
-            table.insertAdjacentHTML("beforeend", `<tr><td>${lastFilm.title}</td><td>${lastFilm.years}</td><td>${lastFilm.authors}</td><td><button class="supprimer">Supprimer</button></td></tr>`)
+            table.insertAdjacentHTML("beforeend", `<tr><td>${lastFilm.title}</td><td>${lastFilm.years}</td><td>${lastFilm.authors}</td><td><button class="supprimer rounded-2 bg-red-700 ring text-white p-1">Supprimer</button></td></tr>`)
+            let btn_sup = document.querySelectorAll(".supprimer");
+
+            //BOUTON SUPPRIMER
+            btn_sup.forEach((btn) => {
+                btn.addEventListener("click", function () {
+                    if (confirm("Voulez-vous supprimer ce film de la liste ?") === true) {
+                        table.deleteRow(this.parentElement.parentElement.rowIndex);
+                    }
+                });
+            });
+
             erreur.innerHTML = `<p>Film ajouté avec succès.</p>`
             setTimeout(() => {
                 erreur.setAttribute("style", "display: none");
@@ -121,23 +132,18 @@ let filtre = document.querySelector("#filtre");
 filtre.addEventListener("change", function (event) {
 
     if (event.target.value === "titre") {
-       films = films.sort((a, b) => a.title.localeCompare(b.title));
+        films = films.sort((a, b) => a.title.localeCompare(b.title));
         movie();
     }
 
     if (event.target.value === "annee") {
-        films = films.sort((a, b) => {return b.years-a.years});
+        films = films.sort((a, b) => {
+            return b.years - a.years
+        });
         movie();
     }
 });
 
-//BOUTON SUPPRIMER
-let btn_sup = document.querySelectorAll(".supprimer");
-// let tRows = document.querySelectorAll("#table tr")
-btn_sup.forEach((btn) => {
-    btn.addEventListener("click", function (e) {
-       if ( confirm("Voulez-vous supprimer ce film de la liste ?") === true) {
-           table.deleteRow(this.parentElement.parentElement.rowIndex);
-       }
-    })
-})
+//BOUTON SUPPRIMER initialisé dans la fonction de l'eventListener #save pour prendre en compte les ajouts de l'utilisateur
+//Bouton supprimer HS après utilisation du filtre (post déplacement)
+//Bouton sup HS si pas ajout utilisateur obviously @_@

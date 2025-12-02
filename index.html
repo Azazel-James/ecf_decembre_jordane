@@ -10,13 +10,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
 </head>
 
-<body>
+<body class="bg-slate-700 text-white">
     
-    <header> <!-- container flex column-->
+    <header class="flex flex-col items-center">
         <h1>Liste des films</h1>
-        <section id="section_ajouter">
+        <section id="section_ajouter" class="flex">
         
-        <button id="btn_ajouter">Ajouter</button>
+        <button id="btn_ajouter" class="rounded-2 bg-slate-500 ring text-white p-1">Ajouter</button>
         </section>
         
         <section id="erreur">
@@ -24,16 +24,17 @@
         </section>
     </header>
     
-    <main>
+    <main class="mx-auto w-screen-2xl">
         <section>
             <label for="filtre">Filtrer par :</label>
             <select name="filtre" id="filtre">
+                <option value=""></option>
                 <option value="annee">Année</option>
                 <option value="titre">Titre</option>
             </select>
         </section>
         
-        <table id="table">
+        <table id="table" class="w-full mt-5 text-lg border-2 bg-slate-500 rounded shadow-md">
         
         </table>
     </main>
