@@ -25,8 +25,9 @@ var films = [
 let table = document.querySelector("#table")
 
 function movie() {
+    table.innerHTML = `<tr><th>Titre</th><th>Année</th><th>Réalisateur</th></tr>`;
     films.forEach(film => {
-        table.insertAdjacentHTML("beforeend", `<tr><td>${film.title}</td><td>${film.years}</td><td>${film.authors}</td></tr>`)
+        table.insertAdjacentHTML("beforeend", `<tr><td>${film.title}</td><td>${film.years}</td><td>${film.authors}</td><td><button class="supprimer">Supprimer</button></td></tr>`)
     })
 }
 
@@ -99,7 +100,7 @@ aj.addEventListener("click", function () {
         if (ok) {
             films.push({title: titre, years: parseInt(annee), authors: real})
             let lastFilm = films[films.length - 1];
-            table.insertAdjacentHTML("beforeend", `<tr><td>${lastFilm.title}</td><td>${lastFilm.years}</td><td>${lastFilm.authors}</td></tr>`)
+            table.insertAdjacentHTML("beforeend", `<tr><td>${lastFilm.title}</td><td>${lastFilm.years}</td><td>${lastFilm.authors}</td><td><button class="supprimer">Supprimer</button></td></tr>`)
             erreur.innerHTML = `<p>Film ajouté avec succès.</p>`
             setTimeout(() => {
                 erreur.setAttribute("style", "display: none");
@@ -115,3 +116,28 @@ aj.addEventListener("click", function () {
 })
 
 //FILTRE
+let filtre = document.querySelector("#filtre");
+
+filtre.addEventListener("change", function (event) {
+
+    if (event.target.value === "titre") {
+       films = films.sort((a, b) => a.title.localeCompare(b.title));
+        movie();
+    }
+
+    if (event.target.value === "annee") {
+        films = films.sort((a, b) => {return b.years-a.years});
+        movie();
+    }
+});
+
+//BOUTON SUPPRIMER
+let btn_sup = document.querySelectorAll(".supprimer");
+// let tRows = document.querySelectorAll("#table tr")
+btn_sup.forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+       if ( confirm("Voulez-vous supprimer ce film de la liste ?") === true) {
+           table.deleteRow(this.parentElement.parentElement.rowIndex);
+       }
+    })
+})
