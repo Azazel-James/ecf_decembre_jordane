@@ -134,17 +134,10 @@ filtre.addEventListener("change", function (event) {
     }
 });
 
-//BOUTON SUPPRIMER initialisé dans la fonction de l'eventListener #save pour prendre en compte les ajouts de l'utilisateur
-//Bouton supprimer HS après utilisation du filtre → le filtre annule les suppressions : movie() republie tout le tableau
-//Bouton sup HS si pas ajout utilisateur obviously @_@ → pas de btn post ajout || pas de btn au départ
-
-let btn_sup = document.querySelectorAll(".supprimer");
-
-//BOUTON SUPPRIMER
-btn_sup.forEach((btn) => {
-    btn.addEventListener("click", function () {
-        if (confirm("Voulez-vous supprimer ce film de la liste ?") === true) {
-            table.deleteRow(this.parentElement.parentElement.rowIndex);
-        }
-    });
-});
+//Bouton supprimer : a essayer --> mettre l'event sur le tableau pour ne pas perdre les boutons après le filtre (voir si ça récupère les add utilisateur, fingers crossed)
+// (lower case yay!)
+table.addEventListener("click", function (e) {
+    if (confirm("Voulez-vous supprimer ce film de la liste ?") === true) {
+        table.deleteRow(e.target.parentElement.parentElement.rowIndex);
+    }
+})
