@@ -29,6 +29,7 @@ search.addEventListener("click", function (e) {
             //Afficher la p 1 de résultat
             let ks = res.Search;
             ks.forEach((k, i) => {
+                if (ks[i].Poster == "N/A") ks[i].Poster = "https://placehold.co/300x400/000000/FFF.png";
             affichage.insertAdjacentHTML("beforeend", ` <article border="3 solid rd-5 #7aaae0" bg="slate-600" shadow="md #7aaae0">
                         <img src="${ks[i].Poster}" alt="Affiche ${ks[i].Title}"  border="rd-t-5 b-2 solid #7aaae0">
                     <div flex="~">
@@ -58,6 +59,8 @@ search.addEventListener("click", function (e) {
 
                         let ffs = data.Search;
                         ffs.forEach((f, i) => {
+                            if (ffs[i].Poster == "N/A") ffs[i].Poster = "https://placehold.co/300x400/000000/FFF.png";
+
                             //get a new section -->
                             main.insertAdjacentHTML("beforeend", `<article border="3 solid rd-5 #7aaae0" bg="slate-600" shadow="md #7aaae0">
                         <img src="${ffs[i].Poster}" alt="Affiche ${ffs[i].Title}"  border="rd-t-5 b-2 solid #7aaae0">
