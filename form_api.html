@@ -4,29 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trouver un film</title>
-    <script src="form.js" defer></script>
+    <script type="module" src="assets/js/form.js" defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/normalize.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime/attributify.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
-<body>
-    <header>
-        <h1>Trouver un film</h1>
+<body bg="slate-700" text="#f0f8ff">
+    <header flex="~ col"
+            items="center"
+            border="solid #7aaae0 rd-5"
+            m="b-5"
+            p="5"
+            bg="[url(/assets/img/banner.jpg)] cover">
+        <h1 uppercase="~">Trouver un film</h1>
         
-        <form>
-            <fieldset id="title">
-                <label for="itxt_titre">Entrez un titre (*)</label>
-                <input type="text" name="titre" id="itxt_titre" placeholder="Le chat" required>
+        <form flex="~ wrap col sm:row" font="bold">
+            <fieldset id="title" bg="#7aaae0/75">
+                <label for="itxt_titre" block="~">Entrez un titre (*)</label>
+                <input type="text" name="titre" id="itxt_titre" placeholder="Pet Sematary" required >
             </fieldset>
             
-            <fieldset>
-                <label for="inbr_annee">Année de sortie</label>
-                <input type="number" name="annee" id="inbr_annee" placeholder="2024">
+            <fieldset bg="#7aaae0/75">
+                <label for="inbr_annee" block="~">Année de sortie</label>
+                <input type="number" name="annee" id="inbr_annee" placeholder="2019">
             </fieldset>
             
-            <fieldset>
-                <label for="type">Type de video</label>
-                <select name="type" id="type">
+            <fieldset bg="#7aaae0/75">
+                <label for="type" block="~">Type de video</label>
+                <select name="type" id="type" w="177px">
                     <option></option>
                     <option value="movie">Film</option>
                     <option value="episode">Episode</option>
@@ -34,13 +40,23 @@
                 </select>
             </fieldset>
             
-            <button type="submit" id="search">Chercher</button>
+            <button type="submit" id="search"
+                    m="t-3 l-3 sm:t-0"
+                    font="bold"
+                    text="#f0f8ff"
+                    ring="~"
+                    border="rd-5"
+                    bg="#7aaae0">Chercher
+            </button>
         
         </form>
     </header>
     
     <main id="main">
-        <section id="cards" flex="~ wrap" justify="around" text="center white">
+        <section id="cards"
+                 flex="~ wrap"
+                 justify="around"
+                 text="center white">
         
         </section>
     </main>

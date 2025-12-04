@@ -6,17 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ECF Vidéothèque</title>
     <script src="assets/js/app.js" defer></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/normalize.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/normalize.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime/attributify.global.js"></script>
 </head>
 
-<body class="bg-slate-700 text-white">
+<body bg="slate-700" text="#f0f8ff">
     
-    <header class="flex flex-col items-center">
-        <h1>Liste des films</h1>
-        <section id="section_ajouter" class="flex">
+    <header flex="~ col"
+            items="center"
+            border="solid #7aaae0 rd-5"
+            m="b-5"
+            p="5"
+            bg="[url(/assets/img/banner.jpg)] cover">
+        <h1 uppercase="~">Liste des films</h1>
+        <section id="section_ajouter" flex="~">
         
-        <button id="btn_ajouter" class="rounded-2 bg-slate-500 ring text-white p-1">Ajouter</button>
+        <button id="btn_ajouter"
+                font="bold"
+                text="#f0f8ff"
+                ring="~"
+                border="rd-5"
+                bg="#7aaae0">Ajouter</button>
         </section>
         
         <section id="erreur">

@@ -37,11 +37,11 @@ let aj = document.querySelector("#btn_ajouter")
 //au click, ajouter form dans la section, récupérer la value des inputs et compléter le tableau
 aj.addEventListener("click", function () {
     let secAj = document.querySelector("#section_ajouter");
-    secAj.innerHTML = `<form id="form_ajouter">
-                <input type="text" name="titre_aj" id="titre_aj" placeholder="Titre">
-                <input type="number" name="annee_aj" id="annee_aj" placeholder="Année de sortie">
-                <input type="text" name="real_aj" id="real_aj" placeholder="Réalisateur">
-                <button type="submit" id="save" class="rounded-2 bg-slate-500 ring text-white p-1">Ajouter</button></form>`;
+    secAj.innerHTML = `<form id="form_ajouter" flex="~ wrap col sm:row" font="bold">
+                <input type="text" name="titre_aj" id="titre_aj" placeholder="Titre" h="30px">
+                <input type="number" name="annee_aj" id="annee_aj" placeholder="Année de sortie" h="30px">
+                <input type="text" name="real_aj" id="real_aj" placeholder="Réalisateur" h="30px">
+                <button type="submit" id="save" font="bold" text="#f0f8ff" ring="~" border="rd-5" bg="#7aaae0" m="t-3 l-3 sm:t-0">Ajouter</button></form>`;
 
     document.querySelector("#save").addEventListener("click", function (event) {
         event.preventDefault();
