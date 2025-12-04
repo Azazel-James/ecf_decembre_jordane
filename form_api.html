@@ -4,22 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trouver un film</title>
+    <script src="form.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/normalize.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime/attributify.global.js"></script>
 </head>
+
 <body>
     <header>
         <h1>Trouver un film</h1>
+        
         <form>
-            <input type="text" name="titre" id="txt_titre" placeholder="Titre">
-            <input type="number" name="annee" id="nbr_annee" placeholder="Année de sortie">
-            <input type="text" name="real" id="txt_real" placeholder="Réalisateur">
-            <button type="submit">Chercher</button>
+            <fieldset id="title">
+                <label for="itxt_titre">Entrez un titre (*)</label>
+                <input type="text" name="titre" id="itxt_titre" placeholder="Le chat" required>
+            </fieldset>
+            
+            <fieldset>
+                <label for="inbr_annee">Année de sortie</label>
+                <input type="number" name="annee" id="inbr_annee" placeholder="2024">
+            </fieldset>
+            
+            <fieldset>
+                <label for="type">Type de video</label>
+                <select name="type" id="type">
+                    <option></option>
+                    <option value="movie">Film</option>
+                    <option value="episode">Episode</option>
+                    <option value="series">Série</option>
+                </select>
+            </fieldset>
+            
+            <button type="submit" id="search">Chercher</button>
+        
         </form>
     </header>
     
-    <main>
-        <section id="cards">
+    <main id="main">
+        <section id="cards" flex="~ wrap" justify="around" text="center white">
         
         </section>
     </main>
+    
+    <footer flex="~" justify="end">
+        <nav id="pagination">
+        
+        </nav>
+    </footer>
 </body>
 </html>
