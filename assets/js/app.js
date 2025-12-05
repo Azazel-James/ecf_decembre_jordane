@@ -144,12 +144,13 @@ filtre.addEventListener("change", function (event) {
 // (lower case yay!)
 table.addEventListener("click", function (e) {
 
-        let delTab = e.target.parentElement.previousElementSibling.textContent //trouver l'index de l'élément à supprimer
+        let delTab = e.target.parentElement.parentElement.textContent //trouver l'index de l'élément à supprimer
 
     if (confirm("Voulez-vous supprimer ce film de la liste ?") === true) {
         table.deleteRow(e.target.parentElement.parentElement.rowIndex); //efface la ligne de l'affichage
 
         //--> supprimer du tableau [films] pour que la ligne ne réapparaisse pas après le filtre
+        films.splice(films.indexOf(delTab),1)
 
     }
 })
