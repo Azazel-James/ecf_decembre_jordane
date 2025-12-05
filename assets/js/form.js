@@ -25,14 +25,29 @@ search.addEventListener("click", function (e) {
         .then(data => data.json())
         .then(data => {
             console.log(data);
+
+            if (data.Response == "False") { //alerte vague en cas d'erreur
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Nous ne trouvons pas le film que vous cherchez...`,
+                    theme: "dark",
+                    confirmButtonColor: "#7aaae0",
+                    confirmButtonText: "AAAAAAH !",
+                    color: "#f0f8ff",
+                    showCloseButton: true,
+                })
+            }
+
             let movies = data.Search;
 
             function fMovieDisplay(movies) {
-                movies.forEach((film, i) => {
-                    if (movies[i].Poster === "N/A") movies[i].Poster = "https://placehold.co/300x445/000000/FFF.png";
 
-                    affichage.insertAdjacentHTML("beforeend",
-                        `<article border="3 solid rd-5 #7aaae0" bg="slate-600" shadow="md #7aaae0" w="300px">
+                movies.forEach((film, i) => {
+                    if (movies[i].Poster === "N/A") movies[i].Poster = "https://placehold.co/300x445?text=Poster+non+disponible?font=poppins/000000/FFF.png"; //image par défaut
+
+                    affichage.insertAdjacentHTML("beforeend", //afficher une card pour chaque film avec poster, titre, date
+                        `<article border="3 solid rd-5 #7aaae0" bg="slate-600" shadow="md hover:lg #7aaae0" m="b-3" w="300px">
                                     <img src="${movies[i].Poster}" alt="Affiche ${movies[i].Title}"  border="rd-t-5 b-2 solid #7aaae0">
                                     <div>
                                         <h3>${movies[i].Title}</h3>
@@ -41,29 +56,31 @@ search.addEventListener("click", function (e) {
                                  </article>`);
                 })
             }
+
+            //calculs pour afficher la pagination
             let totalR = +data.totalResults;
             let nav = Math.ceil(totalR / 10);
             let nav2 = [];
             let page = 1;
             let pagination = document.querySelector("#pagination");
 
-            for (let i = 1; i <= nav; i++) {
+            for (let i = 1; i <= nav; i++) { //faire un tableau avec les numéros de pages pour créer les boutons
                 nav2.push(i);
             }
 
             nav2.forEach((element, i) => {
-                pagination.insertAdjacentHTML("beforeend", `<button data-page="${i + 1}">${i + 1}</button>`)
+                pagination.insertAdjacentHTML("beforeend", `<button text="#f0f8ff" font="bold" ring="~" border="rd-2" bg="#7aaae0" size="30px" data-page="${i + 1}">${i + 1}</button>`)
             })
 
 
             fMovieDisplay(movies);
 
-let fUrl = url_api;
+            let fUrl = url_api; //conserver l'url en état avant ajout page
 
             let buttons = document.querySelectorAll("footer button");
             buttons.forEach((button) => {
 
-                button.addEventListener("click",  () => {
+                button.addEventListener("click", () => {
                     page = button.textContent;
                     console.log(page);
                     document.querySelectorAll("article").forEach((element, i) => {
