@@ -4,30 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trouver un film</title>
-    <script type="module" src="assets/js/form.js" defer></script>
+    <script src="assets/js/form.js" defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/normalize.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime/attributify.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body bg="slate-700" text="#f0f8ff">
-    <header flex="~ col"
+    <header
+            flex="~ col"
             items="center"
             border="solid #7aaae0 rd-5"
             m="b-5"
             p="5"
-            bg="[url(/assets/img/banner.jpg)] cover">
-        <h1 uppercase="~">Trouver un film</h1>
+            bg="[url(/assets/img/banner.jpg)] cover"
+    >
+        <h1 uppercase="~" bg="#7aaae0/75 md:#7aaae0/0">Trouver un film</h1>
         
-        <form flex="~ wrap col sm:row" font="bold">
+        <form flex="~ wrap col sm:row" font="bold" items="center">
             <fieldset id="title" bg="#7aaae0/75">
                 <label for="itxt_titre" block="~">Entrez un titre (*)</label>
-                <input type="text" name="titre" id="itxt_titre" placeholder="Pet Sematary" required >
+                <input type="text" name="titre" id="itxt_titre" placeholder="Pet Sematary" required>
             </fieldset>
             
             <fieldset bg="#7aaae0/75">
                 <label for="inbr_annee" block="~">Année de sortie</label>
-                <input type="number" name="annee" id="inbr_annee" placeholder="2019">
+                <input type="number" min="1900" name="annee" id="inbr_annee" placeholder="2019">
             </fieldset>
             
             <fieldset bg="#7aaae0/75">
@@ -40,28 +42,43 @@
                 </select>
             </fieldset>
             
-            <button type="submit" id="search"
-                    m="t-3 l-3 sm:t-0"
+            <button
+                    type="submit" id="search"
+                    m="t-3 l-3"
+                    w="75px"
+                    h="45px"
                     font="bold"
                     text="#f0f8ff"
                     ring="~"
                     border="rd-5"
-                    bg="#7aaae0">Chercher
+                    bg="#7aaae0"
+            >Chercher
             </button>
         
         </form>
     </header>
     
     <main id="main">
-        <section id="cards"
-                 flex="~ wrap"
-                 justify="around"
-                 text="center white">
+        <section
+                id="cards"
+                flex="~ wrap"
+                justify="around"
+                text="center white"
+        >
         
         </section>
     </main>
     
-    <footer flex="~" justify="end">
+    <footer flex="~" justify="between" p="5">
+        <a
+                href="index.html"
+                text="#f0f8ff hover:#7aaae0"
+                border="solid rd-3"
+                p="3"
+                bg="#7aaae0 hover:#f0f8ff"
+                shadow="~ md hover:sm #7aaae0"
+                class="no-underline"
+        >&lsaquo; Voir la liste de films </a>
         <nav id="pagination">
         
         </nav>

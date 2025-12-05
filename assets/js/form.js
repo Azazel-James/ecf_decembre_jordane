@@ -1,4 +1,3 @@
-const Swal = require('sweetalert2')
 let key = "86a13686";
 let search = document.querySelector("#search"); //button
 let affichage = document.querySelector("#cards"); //section
@@ -24,28 +23,30 @@ search.addEventListener("click", function (e) {
 
     fetch(url_api)
         .then(data => data.json())
-        .catch(error => {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: `${error}, Nous ne trouvons pas le film que vous cherchez...`,
-                theme: "dark",
-                confirmButtonColor: "#7aaae0",
-                confirmButtonText: "AAAAAAH",
-                color: "#f0f8ff",
-                showCloseButton: true,
-            })
-        })
         .then(data => {
             console.log(data);
+
+            if (data.Response == "False") { //alerte vague en cas d'erreur
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Nous ne trouvons pas le film que vous cherchez...`,
+                    theme: "dark",
+                    confirmButtonColor: "#7aaae0",
+                    confirmButtonText: "AAAAAAH !",
+                    color: "#f0f8ff",
+                    showCloseButton: true,
+                })
+            }
 
             let movies = data.Search;
 
             function fMovieDisplay(movies) {
-                movies.forEach((film, i) => {
-                    if (movies[i].Poster === "N/A") movies[i].Poster = "https://placehold.co/300x445/000000/FFF.png";
 
-                    affichage.insertAdjacentHTML("beforeend",
+                movies.forEach((film, i) => {
+                    if (movies[i].Poster === "N/A") movies[i].Poster = "https://placehold.co/300x445?text=Poster+non+disponible?font=poppins/000000/FFF.png"; //image par défaut
+
+                    affichage.insertAdjacentHTML("beforeend", //afficher une card pour chaque film avec poster, titre, date
                         `<article border="3 solid rd-5 #7aaae0" bg="slate-600" shadow="md hover:lg #7aaae0" m="b-3" w="300px">
                                     <img src="${movies[i].Poster}" alt="Affiche ${movies[i].Title}"  border="rd-t-5 b-2 solid #7aaae0">
                                     <div>
@@ -55,13 +56,15 @@ search.addEventListener("click", function (e) {
                                  </article>`);
                 })
             }
+
+            //calculs pour afficher la pagination
             let totalR = +data.totalResults;
             let nav = Math.ceil(totalR / 10);
             let nav2 = [];
             let page = 1;
             let pagination = document.querySelector("#pagination");
 
-            for (let i = 1; i <= nav; i++) {
+            for (let i = 1; i <= nav; i++) { //faire un tableau avec les numéros de pages pour créer les boutons
                 nav2.push(i);
             }
 
@@ -72,12 +75,12 @@ search.addEventListener("click", function (e) {
 
             fMovieDisplay(movies);
 
-let fUrl = url_api;
+            let fUrl = url_api; //conserver l'url en état avant ajout page
 
             let buttons = document.querySelectorAll("footer button");
             buttons.forEach((button) => {
 
-                button.addEventListener("click",  () => {
+                button.addEventListener("click", () => {
                     page = button.textContent;
                     console.log(page);
                     document.querySelectorAll("article").forEach((element, i) => {
@@ -89,18 +92,6 @@ let fUrl = url_api;
                     console.log(url_api);
                     fetch(url_api)
                         .then(res => res.json())
-                        .catch(error => {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Oops...",
-                                text: `${error}, Nous ne trouvons pas le film que vous cherchez...`,
-                                theme: "dark",
-                                confirmButtonColor: "#7aaae0",
-                                confirmButtonText: "AAAAAAH",
-                                color: "#f0f8ff",
-                                showCloseButton: true,
-                            })
-                        })
                         .then(res => {
                             console.log(res);
                             let moreMovies = res.Search;

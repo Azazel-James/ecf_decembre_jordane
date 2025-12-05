@@ -25,9 +25,9 @@ var films = [
 let table = document.querySelector("#table")
 
 function movie() {
-    table.innerHTML = `<tr><th>Titre</th><th>Année</th><th>Réalisateur</th></tr>`;
+    table.innerHTML = `<tr p="5" bg="#7aaae0"><th p="3">Titre</th><th p="3">Année</th><th p="3">Réalisateur</th><th></th></tr>`;
     films.forEach(film => {
-        table.insertAdjacentHTML("beforeend", `<tr><td>${film.title}</td><td>${film.years}</td><td>${film.authors}</td><td><button class="supprimer rounded-2 bg-red-700 ring text-white p-1">Supprimer</button></td></tr>`)
+        table.insertAdjacentHTML("beforeend", `<tr p="5"><td p="3">${film.title}</td><td p="3">${film.years}</td><td p="3">${film.authors}</td><td p="3"><button class="supprimer rounded-2 bg-red-700 ring text-white p-1">Supprimer</button></td></tr>`)
     })
 }
 
@@ -41,7 +41,7 @@ aj.addEventListener("click", function () {
                 <input type="text" name="titre_aj" id="titre_aj" placeholder="Titre" h="30px">
                 <input type="number" name="annee_aj" id="annee_aj" placeholder="Année de sortie" h="30px">
                 <input type="text" name="real_aj" id="real_aj" placeholder="Réalisateur" h="30px">
-                <button type="submit" id="save" font="bold" text="#f0f8ff" ring="~" border="rd-5" bg="#7aaae0" m="t-3 l-3 sm:t-0">Ajouter</button></form>`;
+                <button type="submit" id="save" font="bold" text="#f0f8ff" ring="~" border="rd-5" bg="#7aaae0" m="t-3 l-3 sm:t-0" w="75px" h="45px">Ajouter</button></form>`;
 
     document.querySelector("#save").addEventListener("click", function (event) {
         event.preventDefault();
@@ -51,7 +51,7 @@ aj.addEventListener("click", function () {
         let txterreur = ""; //conserver et MàJ les erreurs pour affichage message final
 
         //VERIFICATION input Titre
-        let titre = document.querySelector("#titre_aj").value; //
+        let titre = document.querySelector("#titre_aj").value.trim(); //
         //capitalize de Titre
         let t2 = "";
         titre.split(" ").forEach(mot => {
@@ -79,7 +79,8 @@ aj.addEventListener("click", function () {
         }
 
         //VERIFICATION input Réalisateur
-        let real = document.querySelector("#real_aj").value;
+        let real = document.querySelector("#real_aj").value.trim();
+
         //capitalize de Réal
         let r2 = "";
         real = real.split(" ");
@@ -98,9 +99,14 @@ aj.addEventListener("click", function () {
         //AFFICHAGE dans la section erreur en fonction de ok
 
         if (ok) {
+            titre = titre.replace(/\W/g, ""); //éviter l'injection de code dans le HTML
+            real = real.replace(/\W/g, "");
+
             films.push({title: titre, years: parseInt(annee), authors: real})
             let lastFilm = films[films.length - 1];
-            table.insertAdjacentHTML("beforeend", `<tr><td>${lastFilm.title}</td><td>${lastFilm.years}</td><td>${lastFilm.authors}</td><td><button class="supprimer rounded-2 bg-red-700 ring text-white p-1">Supprimer</button></td></tr>`)
+
+            table.insertAdjacentHTML("beforeend", `<tr p="5"><td p="3">${lastFilm.title}</td><td p="3">${lastFilm.years}</td><td p="3">${lastFilm.authors}</td><td p="3"><button class="supprimer rounded-2 bg-red-700 ring text-white p-1">Supprimer</button></td></tr>`)
+
 
             erreur.innerHTML = `<p>Film ajouté avec succès.</p>`
             setTimeout(() => {
@@ -137,7 +143,13 @@ filtre.addEventListener("change", function (event) {
 //Bouton supprimer : a essayer --> mettre l'event sur le tableau pour ne pas perdre les boutons après le filtre (voir si ça récupère les add utilisateur, fingers crossed)
 // (lower case yay!)
 table.addEventListener("click", function (e) {
+
+        let delTab = e.target.parentElement.previousElementSibling.textContent //trouver l'index de l'élément à supprimer
+
     if (confirm("Voulez-vous supprimer ce film de la liste ?") === true) {
-        table.deleteRow(e.target.parentElement.parentElement.rowIndex);
+        table.deleteRow(e.target.parentElement.parentElement.rowIndex); //efface la ligne de l'affichage
+
+        //--> supprimer du tableau [films] pour que la ligne ne réapparaisse pas après le filtre
+
     }
 })

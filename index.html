@@ -12,21 +12,28 @@
 
 <body bg="slate-700" text="#f0f8ff">
     
-    <header flex="~ col"
+    <header
+            flex="~ col"
             items="center"
             border="solid #7aaae0 rd-5"
             m="b-5"
             p="5"
-            bg="[url(/assets/img/banner.jpg)] cover">
-        <h1 uppercase="~">Liste des films</h1>
+            bg="[url(/assets/img/banner.jpg)] cover"
+    >
+        <h1 uppercase="~" bg="#7aaae0/75 md:#7aaae0/0">Liste des films</h1>
         <section id="section_ajouter" flex="~">
-        
-        <button id="btn_ajouter"
-                font="bold"
-                text="#f0f8ff"
-                ring="~"
-                border="rd-5"
-                bg="#7aaae0">Ajouter</button>
+            
+            <button
+                    id="btn_ajouter"
+                    font="bold"
+                    text="#f0f8ff"
+                    ring="~"
+                    border="rd-5"
+                    bg="#7aaae0"
+                    w="75px"
+                    h="45px"
+            >Ajouter
+            </button>
         </section>
         
         <section id="erreur">
@@ -34,21 +41,42 @@
         </section>
     </header>
     
-    <main class="mx-auto w-screen-2xl">
+    <main w="full">
         <section>
             <label for="filtre">Filtrer par :</label>
-            <select name="filtre" id="filtre">
+            <select name="filtre" id="filtre" w="sm:177px">
                 <option value=""></option>
                 <option value="annee">Année</option>
                 <option value="titre">Titre</option>
             </select>
         </section>
         
-        <table id="table" class="w-full mt-5 text-lg border-2 bg-slate-500 rounded shadow-md">
-        
-        </table>
+        <section flex="~" justify="center" p-5>
+            <table
+                    id="table"
+                    grow="~"
+                    m="t-5"
+                    text="lg left"
+                    border="2 solid rd-2 collapse"
+                    bg="slate-500"
+                    shadow="md"
+            >
+            
+            </table>
+        </section>
     </main>
-
+    
+    <footer flex="~" justify="end" p="5">
+        <a
+                href="form_api.html"
+                text="#f0f8ff hover:#7aaae0"
+                border="solid rd-3"
+                p="3"
+                bg="#7aaae0 hover:#f0f8ff"
+                shadow="~ md hover:sm #7aaae0"
+                class="no-underline"
+        >Trouver un film &rsaquo;</a>
+    </footer>
 </body>
 
 </html>
