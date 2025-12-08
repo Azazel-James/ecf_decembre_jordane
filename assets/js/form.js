@@ -11,15 +11,16 @@ search.addEventListener("click", function (e) {
 
     let url_api = `http://www.omdbapi.com/?apikey=${key}`;
 
-    if (s === "")
+    if (s === "") {
         alert("J'ai besoin d'un titre stp")
-    else
+        location.reload();
+    } else {
         url_api += `&s=${s}`;
+    }
 
     if (y !== "") url_api += `&y=${y}`;
     if (type !== "") url_api += `&type=${type}`;
 
-    console.log(url_api);
 
     fetch(url_api)
         .then(data => data.json())
@@ -44,7 +45,7 @@ search.addEventListener("click", function (e) {
             function fMovieDisplay(movies) {
 
                 movies.forEach((film, i) => {
-                    if (movies[i].Poster === "N/A") movies[i].Poster = "https://placehold.co/300x445?text=Poster+non+disponible?font=poppins/000000/FFF.png"; //image par défaut
+                    if (movies[i].Poster === "N/A") movies[i].Poster = "https://placehold.co/300x445/000000/FFF?text=Poster+non+disponible"; //image par défaut
 
                     affichage.insertAdjacentHTML("beforeend", //afficher une card pour chaque film avec poster, titre, date
                         `<article border="3 solid rd-5 #7aaae0" bg="slate-600" shadow="md hover:lg #7aaae0" m="b-3" w="300px">
