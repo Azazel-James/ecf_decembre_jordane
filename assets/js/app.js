@@ -99,8 +99,8 @@ aj.addEventListener("click", function () {
         //AFFICHAGE dans la section erreur en fonction de ok
 
         if (ok) {
-            titre = titre.replace(/\W/g, ""); //éviter l'injection de code dans le HTML
-            real = real.replace(/\W/g, "");
+            titre = titre.replace(/[^\w\s]/g, ""); //éviter l'injection de code dans le HTML
+            real = real.replace(/[^\w\s]/g, "");
 
             films.push({title: titre, years: parseInt(annee), authors: real})
             let lastFilm = films[films.length - 1];
